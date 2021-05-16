@@ -1,0 +1,66 @@
+{
+    "primaryColours": [
+        {
+            "name": "amethyst",
+            "value": "purple-800",
+            "desaturated": "purple-300"
+        },
+        {
+            "name": "emerald",
+            "value": "green-800"
+        },
+        {
+            "name": "ruby",
+            "desaturated": "red-300"
+        },
+        {
+            "name": "saphire",
+            "value": "light-blue-800",
+            "desaturated": "light-blue-300"
+        }
+    ],
+    "secondaryColours": [
+        {
+            "name": "azurite",
+            "value": "blue-a700",
+            "desaturated": "blue-a200"
+        },
+        {
+            "name": "crocoite",
+            "value": "orange-a700",
+            "desaturated": "orange-a200"
+        }
+    ],
+    "fontFamily": {
+        "map": {
+            "headline1": "alpha",
+            "headline2": "alpha",
+            "headline3": "alpha",
+            "headline4": "alpha",
+            "headline5": "alpha",
+            "headline6": "beta",
+            "subtitle1": "alpha",
+            "subtitle2": "beta",
+            "body1": "alpha",
+            "body2": "alpha",
+            "caption": "alpha",
+            "button": "beta",
+            "overline": "alpha"
+
+        },
+        "styles": {
+            "alpha": [
+                "Overpass",
+                "Source Sans 3",
+                "sans-serif"
+            ],
+            "beta": [
+                "IBM Plex Serif",
+                "Source Serif 4",
+                "serif"
+            ]
+        }
+    },
+    "nestingLevel": 2,
+    "quick": false
+}

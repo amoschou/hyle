@@ -1,0 +1,27 @@
+{
+    "name": "amoschou/hyle",
+    "description": "Material Components for the web as a Laravel package.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Moschou",
+            "email": "amoschou@amoschou.net"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AMoschou\\Hyle\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AMoschou\\Hyle\\HyleServiceProvider"
+            ]
+        }
+    }
+}

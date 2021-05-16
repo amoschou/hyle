@@ -1,0 +1,22 @@
+@use 'sass:color';
+@use 'sass:math';
+@use '@material/theme/color-palette' as cp;
+
+// Material environmental colours
+$black: #000000;   // Black
+$white: #FFFFFF;   // White, Light background and surface
+$dark: #121212;    // Dark background and surface
+$error: #B00020;   // Material error
+$background: $white;
+$surface: $white;
+$error-desaturated: color.mix($white, $error, 40%); // #CF6679;
+$background-dark: $dark;
+$surface-dark: $dark;
+
+// Theme colours
+// See theme-definition.json for primary and secondary colours.
+// Desaturated colours are used for dark theme.
+{{ themeColours }}
+
+// Theme fonts
+{{ themeFonts }}

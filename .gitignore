@@ -4,3 +4,18 @@ composer.phar
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
+
+/resources/sass/old
+resources/sass/_mixins.scss
+resources/sass/_newa.scss
+resources/sass/_post.scss
+resources/sass/baseline-default-new.scss
+resources/sass/fakemdc.scss
+resources/sass/fix-top-app-bar.scss
+resources/sass/hyle-mdc-top-app-bar.scss
+resources/sass/material-components-web.scss
+resources/sass/scrollbar.scss
+resources/sass/tmp-hylemin.scss
+src/resources/views/components/frame-old.blade.php
+manifest
+questions.md

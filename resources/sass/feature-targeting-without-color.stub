@@ -1,0 +1,69 @@
+@use 'constants' as c;
+@use 'sass:map';
+@use 'pre';
+
+// HERE, @material/typography PRECEDES @material/button/button
+
+@use '@material/typography' with (
+    $styles-headline1: c.$font-{{ fontStyle::headline1 }},
+    $styles-headline2: c.$font-{{ fontStyle::headline2 }},
+    $styles-headline3: c.$font-{{ fontStyle::headline3 }},
+    $styles-headline4: c.$font-{{ fontStyle::headline4 }},
+    $styles-headline5: c.$font-{{ fontStyle::headline5 }},
+    $styles-headline6: c.$font-{{ fontStyle::headline6 }},
+    $styles-subtitle1: c.$font-{{ fontStyle::subtitle1 }},
+    $styles-subtitle2: c.$font-{{ fontStyle::subtitle2 }},
+    $styles-body1: c.$font-{{ fontStyle::body1 }},
+    $styles-body2: c.$font-{{ fontStyle::body2 }},
+    $styles-caption: c.$font-{{ fontStyle::caption }},
+    $styles-button: c.$font-{{ fontStyle::button }},
+    $styles-overline: c.$font-{{ fontStyle::overline }},
+);
+@use '@material/button/button';
+@use '@material/card';
+@use '@material/checkbox';
+@use '@material/circular-progress';
+@use '@material/dialog';
+@use '@material/drawer';
+@use '@material/elevation';
+@use '@material/fab';
+@use '@material/feature-targeting';
+@use '@material/floating-label/mdc-floating-label';
+@use '@material/form-field';
+@use '@material/icon-button';
+@use '@material/layout-grid/mdc-layout-grid';
+@use '@material/line-ripple/mdc-line-ripple';
+@use '@material/list';
+@use '@material/menu';
+@use '@material/menu-surface';
+@use '@material/notched-outline/mdc-notched-outline';
+@use '@material/radio/radio';
+@use '@material/select/select';
+@use '@material/textfield';
+@use '@material/textfield/helper-text';
+@use '@material/theme';
+// @use "@material/top-app-bar/mdc-top-app-bar";
+// @use './hyle-mdc-top-app-bar.scss'; // Apply a fix. This wraps the content with core-styles() {}.
+
+@include button.styles(feature-targeting.without(color));
+@include card.core-styles(feature-targeting.without(color));
+@include checkbox.core-styles(feature-targeting.without(color));
+@include circular-progress.core-styles(feature-targeting.without(color));
+@include dialog.core-styles(feature-targeting.without(color));
+@include drawer.core-styles(feature-targeting.without(color));
+@include drawer.dismissible-core-styles(feature-targeting.without(color));
+@include drawer.modal-core-styles(feature-targeting.without(color));
+@include elevation.core-styles(feature-targeting.without(color));
+@include fab.core-styles(feature-targeting.without(color));
+@include form-field.core-styles(feature-targeting.without(color));
+@include icon-button.core-styles(feature-targeting.without(color));
+@include list.deprecated-core-styles(feature-targeting.without(color));
+@include menu.core-styles(feature-targeting.without(color));
+@include menu-surface.core-styles(feature-targeting.without(color));
+@include radio.core-styles(feature-targeting.without(color));
+@include select.core-styles(feature-targeting.without(color));
+@include textfield.core-styles(feature-targeting.without(color));
+@include helper-text.helper-text-core-styles(feature-targeting.without(color));
+@include theme.core-styles(feature-targeting.without(color));
+// @include hyle-mdc-top-app-bar.hyle-core-styles(feature-targeting.without(color));
+@include typography.core-styles(feature-targeting.without(color));

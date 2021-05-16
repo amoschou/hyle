@@ -1,0 +1,163 @@
+@use 'constants' as c;
+@use 'sass:map';
+@use 'pre';
+
+$theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel }}', '{{ secondaryColourLabel }}');
+
+// HERE, @material/theme PRECEDES @material/typography PRECEDES @material/button/button
+
+@use '@material/theme' with (
+    $primary:    map.get($theme, 'primary'),
+    $secondary:  map.get($theme, 'secondary'),
+    $background: map.get($theme, 'background'),
+    $surface:    map.get($theme, 'surface'),
+    $error:      map.get($theme, 'error')
+);
+@use '@material/typography' with (
+    $styles-headline1: c.$font-{{ fontStyle::headline1 }},
+    $styles-headline2: c.$font-{{ fontStyle::headline2 }},
+    $styles-headline3: c.$font-{{ fontStyle::headline3 }},
+    $styles-headline4: c.$font-{{ fontStyle::headline4 }},
+    $styles-headline5: c.$font-{{ fontStyle::headline5 }},
+    $styles-headline6: c.$font-{{ fontStyle::headline6 }},
+    $styles-subtitle1: c.$font-{{ fontStyle::subtitle1 }},
+    $styles-subtitle2: c.$font-{{ fontStyle::subtitle2 }},
+    $styles-body1: c.$font-{{ fontStyle::body1 }},
+    $styles-body2: c.$font-{{ fontStyle::body2 }},
+    $styles-caption: c.$font-{{ fontStyle::caption }},
+    $styles-button: c.$font-{{ fontStyle::button }},
+    $styles-overline: c.$font-{{ fontStyle::overline }},
+);
+@use '@material/button/button';
+@use '@material/card';
+@use '@material/checkbox';
+@use '@material/circular-progress';
+@use '@material/dialog';
+@use '@material/drawer';
+@use '@material/elevation';
+@use '@material/fab';
+@use '@material/floating-label/mdc-floating-label';
+@use '@material/form-field';
+@use '@material/icon-button';
+@use '@material/line-ripple/mdc-line-ripple';
+@use '@material/list';
+@use '@material/menu';
+@use '@material/menu-surface';
+@use '@material/notched-outline/mdc-notched-outline';
+@use '@material/radio/radio';
+@use '@material/select/select';
+@use '@material/textfield';
+@use '@material/textfield/helper-text';
+@use './fix-theme';
+
+// @use './hyle-mdc-top-app-bar.scss'; // Apply a fix. This wraps the content with core-styles() {}.
+// Update: This doesn't seem to work. When the dismissible drawer is opened, the action icons in the top app bar are shifted off screen.
+// Instead, put @use 'material/top-app-bar/mdc-top-app-bar'; here outside the theme wrapper class (because no core-styles() mixin exists)
+// And just live with that until an updated version with core-styles.
+// The page's theme must be loaded last in the HTML, otherwise it will be overridden by any subsequent .mdc-top-app-bar's.
+
+@use '@material/top-app-bar/mdc-top-app-bar';
+
+{{ themeSpecificers }} {
+    @include button.styles(color);
+    @include checkbox.core-styles(color);
+    @include card.core-styles(color);
+    @include circular-progress.core-styles(color);
+    @include dialog.core-styles(color);
+    @include drawer.core-styles(color);
+    @include drawer.dismissible-core-styles(color);
+    @include drawer.modal-core-styles(color);
+    @include elevation.core-styles(color);
+    @include fab.core-styles(color);
+    @include form-field.core-styles(color);
+    @include icon-button.core-styles(color);
+    @include list.deprecated-core-styles(color);
+    @include menu.core-styles(color);
+    @include menu-surface.core-styles(color);
+    @include radio.core-styles(color);
+    @include select.core-styles(color);
+    @include textfield.core-styles(color);
+    @include helper-text.helper-text-core-styles(color);
+    @include fix-theme.core-styles(color);
+    // @include hyle-mdc-top-app-bar.hyle-core-styles(color);
+    @include typography.core-styles(color);
+
+    // MDC Web does not yet support dark theme out of the box. For now, include these styles below as a sort of fix.
+
+    // Check out https://material-components-web.appspot.com/theme/index.html?theme=dark
+
+    .hyle-dark {
+        .mdc-top-app-bar {
+            background-color: c.${{ primaryColourLabel }}-dark;
+
+            .mdc-top-app-bar__title,
+            .mdc-top-app-bar__navigation-icon,
+            .mdc-top-app-bar__action-item {
+                color: #fff;
+                color: var(--mdc-theme-text-primary-on-dark, #fff);
+            }
+        }
+
+        .mdc-top-app-bar--short-collapsed .mdc-elevation-overlay,
+        .mdc-top-app-bar--fixed-scrolled .mdc-elevation-overlay {
+            background-color: rgba(255, 255, 255, 0.09);
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            opacity: 100%;
+        }
+
+        .mdc-menu-surface .mdc-elevation-overlay {
+            background-color: rgba(255, 255, 255, 0.12);
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            opacity: 100%;
+        }
+
+        // "The elevation overlays are not applied to component surfaces that use primary or secondary colors." (https://material.io/design/color/dark-theme.html#properties)
+        // So the following is commented out, but is kept here as a model for other situations where the technique might apply.
+        //
+        // .mdc-button--raised {
+        //     .mdc-elevation-overlay {
+        //         background-color: #fff;
+        //         opacity: 7%;
+        //     }
+        // 
+        //     &:hover .mdc-elevation-overlay,
+        //     &:focus .mdc-elevation-overlay {
+        //         opacity: 9%;
+        //     }
+        // 
+        //     &:active .mdc-elevation-overlay {
+        //         opacity: 12%;
+        //     }
+        // 
+        //     &:disabled {
+        //         opacity: 0;
+        //     }
+        // }
+
+        //  Elevation level     White overlay transparency
+        //  0 <= dp <= 2        pc = 0.25*(dp^3 - 9*dp^2 + 28*dp)
+        //  2 <= dp <= 6        pc = dp + 5
+        //  6 <= dp <= 12       pc = 0.5*dp + 8
+        //  12 <= dp <= 24      pc = 12 + log2(dp - 8)
+        // These functions provide smooth(ish) interpolation between elevation levels:
+        // 0                    0
+        // 1                    5
+        // 2                    7
+        // 3                    8
+        // 4                    9
+        // 6                    11
+        // 8                    12
+        // 12                   14
+        // 16                   15
+        // 24                   16
+
+
+    }
+
+}

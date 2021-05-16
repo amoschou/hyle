@@ -1,0 +1,35 @@
+@use 'constants' as c;
+
+// The baseline Material color theme
+
+$baseline-default-primary: #6200EE;
+$baseline-default-primary-variant: #3700B3;
+$baseline-default-secondary: #03DAC6;
+$baseline-default-secondary-variant: #018786;
+$baseline-default-background: c.$white;
+$baseline-default-surface: c.$white;
+$baseline-default-error: c.$error;
+
+$baseline-dark-primary: #BB86FC;
+$baseline-dark-primary-variant: $baseline-default-primary-variant;
+$baseline-dark-secondary: $baseline-default-secondary;
+$baseline-dark-secondary-variant: $baseline-dark-secondary; // There is no secondary variant in dark theme, make it identical to secondary
+$baseline-dark-background: c.$background-dark;
+$baseline-dark-surface: c.$surface-dark;
+$baseline-dark-error: c.$error-desaturated;
+
+// Generic colours
+
+$surface-dark: c.$surface-dark;
+
+// Theme definitions
+
+$themes: {{ themeDefinitions }}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
