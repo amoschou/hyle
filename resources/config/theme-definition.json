@@ -2,19 +2,23 @@
     "primaryColours": [
         {
             "name": "amethyst",
-            "value": "purple-800",
-            "desaturated": "purple-300"
+            "prefix": "cc",
+            "value": "carbon--purple-80",
+            "desaturated": "carbon--purple-30"
         },
         {
             "name": "emerald",
+            "prefix": "mcp",
             "value": "green-800"
         },
         {
             "name": "ruby",
+            "prefix": "mcp",
             "desaturated": "red-300"
         },
         {
             "name": "saphire",
+            "prefix": "mcp",
             "value": "light-blue-800",
             "desaturated": "light-blue-300"
         }
@@ -22,11 +26,13 @@
     "secondaryColours": [
         {
             "name": "azurite",
+            "prefix": "mcp",
             "value": "blue-a700",
             "desaturated": "blue-a200"
         },
         {
             "name": "crocoite",
+            "prefix": "mcp",
             "value": "orange-a700",
             "desaturated": "orange-a200"
         }

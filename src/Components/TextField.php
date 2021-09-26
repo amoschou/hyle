@@ -111,6 +111,13 @@ class TextField extends HyleComponent
     public $maxLength;
 
     /**
+     * Minimum length to accept input.
+     *
+     * @var number
+     */
+    public $minLength;
+
+    /**
      * Message to show in the error color when the textfield is invalid.
      * (Helper text will not be visible)
      *
@@ -209,6 +216,16 @@ class TextField extends HyleComponent
      */
     public $textArea;
 
+    public $autocapitalize;
+
+    public $readOnly;
+
+    public $focused;
+
+    protected $isUiValid;
+
+    public $initialFocus;
+
     /**
      * Create a new component instance.
      *
@@ -218,10 +235,10 @@ class TextField extends HyleComponent
      */
     public function __construct(
         $id = null,
-        $value = null,
-        $type = null,
+        $value = '',
+        $type = 'text',
         $label = null,
-        $placeholder = null,
+        $placeholder = '',
         $prefix = null,
         $suffix = null,
         $icon = null,
@@ -231,12 +248,13 @@ class TextField extends HyleComponent
         $outlined = null,
         $helper = null,
         $helperPersistent = null,
-        $required = null,
-        $maxLength = null,
-        $validationMessage = null,
-        $pattern = null,
-        $min = null,
-        $max = null,
+        $required = false,
+        $minLength = -1,
+        $maxLength = -1,
+        $validationMessage = null, // previously '', but isset('') returns true
+        $pattern = '',
+        $min = '',
+        $max = '',
         $size = null,
         $step = null,
         $autoValidate = null,
@@ -244,9 +262,14 @@ class TextField extends HyleComponent
         $willValidate = null,
         $validityTransform = null,
         $validateOnInitialRender = null,
-        $name = null,
+        $name = '',
         $endAligned = false,
-        $textArea = false
+        $textArea = false,
+        $autocapitalize = '',
+        $readOnly = false,
+        $focused = false,
+        $isUiValid = true,
+        $initialFocus = false
     ) {
         parent::__construct($id);
         $this->value = $value;
@@ -278,6 +301,10 @@ class TextField extends HyleComponent
         $this->name = $name;
         $this->endAligned = $endAligned;
         $this->textArea = $textArea;
+        $this->readOnly = $readOnly;
+        $this->focused = $focused;
+        $this->isUiValid = $isUiValid;
+        $this->initialFocus = $initialFocus;
     }
 
     /**
@@ -287,7 +314,11 @@ class TextField extends HyleComponent
      */
     public function render()
     {
-        $this->label = $this->textArea ? false : $this->label;
+        $shouldRenderCharCounter = $this->charCounter && $this->maxLength !== -1;
+
+        $shouldRenderHelperText = isset($this->helper) || isset($this->validationMessage) || $shouldRenderCharCounter;
+
+        // $this->label = $this->textArea ? false : $this->label;
 
         $class = 'mdc-text-field';
         $class .= $this->disabled ? ' mdc-text-field--disabled' : '';
@@ -296,14 +327,18 @@ class TextField extends HyleComponent
         $class .= $this->icon ? ' mdc-text-field--with-leading-icon' : '';
         $class .= $this->iconTrailing ? ' mdc-text-field--with-trailing-icon' : '';
         $class .= $this->endAligned ? ' mdc-text-field--end-aligned' : '';
+        // also (not inspired from mwc):
+        // $class .= $this->focused ? ' mdc-text-field--focused mdc-text-field--label-floating' : '';
 
-        $shouldRenderCharCounter = $this->charCounter && $this->maxLength !== -1;
+        $prefilled = (boolean) $this->value;
 
-        $shouldRenderHelperText = !!$this->helper || !!$this->validationMessage || $shouldRenderCharCounter;
+        $invalid = (boolean) $this->validationMessage;
 
         return view('hyle::text-field', [
             'shouldRenderCharCounter' => $shouldRenderCharCounter,
             'shouldRenderHelperText' => $shouldRenderHelperText,
+            'prefilled' => $prefilled,
+            'invalid' => $invalid,
             'class' => $class
         ]);
     }
@@ -317,48 +352,83 @@ class TextField extends HyleComponent
     {
         $showValidationMessage = $this->validationMessage && !$this->isUiValid;
 
-        $str = [];
+        $inputAttributes = [
+            'aria-labelledby' => "text-field::{$this->id}::floating-label",
+            'aria-controls' => $shouldRenderHelperText ? "text-field::{$this->id}::helper-text" : null,
+            'aria-describedby' => ($this->focused || $this->helperPersistent || $showValidationMessage) ? "text-field::{$this->id}::helper-text" : null,
+            'aria-errortext' => $showValidationMessage ? "text-field::{$this->id}::helper-text" : null,
+            'class' => 'mdc-text-field__input',
+            'type' => $this->type,
+            'value' => $this->value ? $this->value : null,
+            'disabled' => $this->disabled ? true : null,
+            'placeholder' => $this->placeholder === '' ? null : $this->placeholder,
+            'required' => $this->required ? true : null,
+            'readonly' => $this->readOnly ? true : null,
+            'minLength' => $this->minLength === -1 ? null : $this->minLength,
+            'maxLength' => $this->maxLength === -1 ? null : $this->maxLength,
+            'pattern' => $this->pattern === '' ? null : $this->pattern,
+            'min' => $this->min === '' ? null : $this->min,
+            'max' => $this->max === '' ? null : $this->max,
+            'step' => $this->step,
+            'size' => $this->size,
+            'name' => $this->name === '' ? null : $this->name,
+            'inputmode' => $this->inputMode ?? null,
+            'autocapitalize' => $this->autocapitalize === '' ? null : $this->autocapitalize,
+            // also (not inspried from mwc)
+            // 'autofocus' => $this->focused
+            'data-mdc-dialog-initial-focus' => $this->initialFocus ? true : null
+        ];
 
-        $str[] = 'aria-labelledby="text-field::' . $this->id . '::floating-label"';
+        $inputAttributesStrings = [];
 
-        if($shouldRenderHelperText) {
-            $str[] = 'aria-controls="text-field::' . $this->id . '::helper-text"';
+        foreach($inputAttributes as $key => $val) {
+            if(!is_null($val)) {
+                if($val === true) {
+                    $inputAttributesStrings[] = $key;
+                } else {
+                    $inputAttributesStrings[] = "{$key}=\"{$val}\"";
+                }
+            }
         }
 
-        if($this->focused || $this->helperPersistent || $showValidationMessage) {
-            $str[] = 'aria-describedby="text-field::' . $this->id . '::helper-text"';
-        }
-
-        if($showValidationMessage) {
-            $str[] = 'aria-errortext="text-field::' . $this->id . '::helper-text"';
-        }
-
-        return '<input ' . implode(' ', $str) . '>';
-
-        //// <input
-        //// aria-labelledby="label"
-        //// aria-controls="${ifDefined(ariaControlsOrUndef)}"
-        // aria-describedby="${ifDefined(ariaDescribedbyOrUndef)}"
-        // aria-errortext="${ifDefined(ariaErrortextOrUndef)}"
-        // class="mdc-text-field__input"
-        // type="${this.type}"
-        // .value="${live(this.value) as unknown as string}"
-        // ?disabled="${this.disabled}"
-        // placeholder="${this.placeholder}"
-        // ?required="${this.required}"
-        // ?readonly="${this.readOnly}"
-        // minlength="${ifDefined(minOrUndef)}"
-        // maxlength="${ifDefined(maxOrUndef)}"
-        // pattern="${ifDefined(this.pattern ? this.pattern : undefined)}"
-        // min="${ifDefined(this.min === '' ? undefined : this.min as number)}"
-        // max="${ifDefined(this.max === '' ? undefined : this.max as number)}"
-        // step="${ifDefined(this.step === null ? undefined : this.step)}"
-        // size="${ifDefined(this.size === null ? undefined : this.size)}"
-        // name="${ifDefined(this.name === '' ? undefined : this.name)}"
-        // inputmode="${ifDefined(this.inputMode)}"
-        // autocapitalize="${ifDefined(autocapitalizeOrUndef)}"
-        // @input="${this.handleInputChange}"
-        // @focus="${this.onInputFocus}"
-        // @blur="${this.onInputBlur}">`;
+        return '<input ' . implode(' ', $inputAttributesStrings) . '>';
     }
+
+    public function renderHelperText($shouldRenderHelperText, $shouldRenderCharCounter, $hasValidationError = false) {
+        $showValidationMessage = $this->validationMessage && $hasValidationError;
+
+        $classes = 'mdc-text-field-helper-text';
+        $classes .= $this->helperPersistent ? ' mdc-text-field-helper-text--persistent' : '';
+        $classes .= $showValidationMessage ? ' mdc-text-field-helper-text--validation-msg' : '';
+
+        $ariaHiddenOrUndef = $this->focused || $this->helperPersistent || $showValidationMessage ? null : 'true';
+
+        $helperText = $showValidationMessage ? $this->validationMessage : $this->helper;
+
+        if(!$shouldRenderHelperText) {
+            return '';
+        }
+
+        $returnString = '<div class="mdc-text-field-helper-line">';
+        $returnString .= '<div id="text-field-helper-text::' . $this->id . '::root"';
+        $returnString .= is_null($ariaHiddenOrUndef) ? '' : ' aria-hidden="' . $ariaHiddenOrUndef . '"';
+        $returnString .= ' class="' . $classes . '" >';
+        $returnString .= $helperText;
+        $returnString .= '</div>';
+        $returnString .= $this->renderCharCounter($shouldRenderCharCounter);
+        $returnString .= '</div>';
+
+        return $returnString;
+    }
+
+    protected function renderCharCounter($shouldRenderCharCounter) {
+        $length = min(mb_strlen($this->value), $this->maxLength);
+
+        if(!$shouldRenderCharCounter) {
+            return '';
+        }
+
+        return '<span class="mdc-text-field-character-counter">' . $length . ' / ' . $this->maxLength . '</span>';
+    }
+
 }

@@ -40,7 +40,8 @@ class InstallCommand extends Command
         // NPM Packages (None dev)
         $this->updateNodePackages(function ($packages) {
             return [
-                'material-components-web' => '^11.0.0',
+                'material-components-web' => '^13.0.0',
+                '@carbon/colors' => '^10.30.0'
             ] + $packages;
         }, false);
 
@@ -191,16 +192,19 @@ class InstallCommand extends Command
             $block[] = '// '.$primarySecondary.' colours';
             foreach($featureTargets['color']["{$primarySecondary}Colours"] as $colour) {
                 if(isset($colour['value']) && isset($colour['desaturated'])) {
-                    $block[] = '$'.$colour['name'].': '.(substr($colour['value'], 0, 1) === '#' ? '' : 'cp.$') . $colour['value'] . ';';
-                    $block[] = '$'.$colour['name'].'-desaturated: '.(substr($colour['desaturated'], 0, 1) === '#' ? '' : 'cp.$') . $colour['desaturated'] . ';';
+                    $prefix = $colour['prefix'] ?? 'mcp';
+                    $block[] = '$'.$colour['name'].': '.(substr($colour['value'], 0, 1) === '#' ? '' : $prefix.'.$') . $colour['value'] . ';';
+                    $block[] = '$'.$colour['name'].'-desaturated: '.(substr($colour['desaturated'], 0, 1) === '#' ? '' : $prefix.'.$') . $colour['desaturated'] . ';';
                 }
                 if(isset($colour['value']) && !isset($colour['desaturated'])) {
-                    $block[] = '$'.$colour['name'].': '.(substr($colour['value'], 0, 1) === '#' ? '' : 'cp.$') . $colour['value'] . ';';
+                    $prefix = $colour['prefix'] ?? 'mcp';
+                    $block[] = '$'.$colour['name'].': '.(substr($colour['value'], 0, 1) === '#' ? '' : $prefix.'.$') . $colour['value'] . ';';
                     $block[] = '$'.$colour['name'].'-desaturated: color.mix($white, $'.$colour['name'].', 40%);';
                 }
                 if(!isset($colour['value']) && isset($colour['desaturated'])) {
-                    $block[] = '$'.$colour['name'].'-desaturated: '.(substr($colour['desaturated'], 0, 1) === '#' ? '' : 'cp.$') . $colour['desaturated'] . ';';
-                    $block[] = '$'.$colour['name'].': rgb(math.clamp(0, color.red($'.$colour['name'].'-desaturated)*5/3-170, 255), math.clamp(0, color.green($'.$colour['name'].'-desaturated)*5/3-170, 255), math.clamp(0, color.blue($'.$colour['name'].'-desaturated)*5/3-170, 255));' ;
+                    $prefix = $colour['prefix'] ?? 'mcp';
+                    $block[] = '$'.$colour['name'].'-desaturated: '.(substr($colour['desaturated'], 0, 1) === '#' ? '' : $prefix.'.$') . $colour['desaturated'] . ';';
+                    $block[] = '$'.$colour['name'].': rgb(math.clamp(0, math.div(color.red($'.$colour['name'].'-desaturated)*5,3)-170, 255), math.div(math.clamp(0, color.green($'.$colour['name'].'-desaturated)*5,3)-170, 255), math.div(math.clamp(0, color.blue($'.$colour['name'].'-desaturated)*5,3)-170, 255));' ;
                 }
                 if(!isset($colour['value']) && !isset($colour['desaturated'])) {
                     throw new \Exception('Undefined theme colour.');                    

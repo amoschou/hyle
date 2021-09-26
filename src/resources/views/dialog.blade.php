@@ -52,6 +52,8 @@ CONFIRMATIONCONTENT;
             @isset($heading) aria-labelledby="dialog::{{ $id }}::title" @endisset
             aria-describedby="dialog::{{ $id }}::content"
         >
+            {{ $topSlot ?? null }}
+
             <!-- TITLE: Brief summary of the dialog's purpose -->
             @isset($heading)
                 <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->

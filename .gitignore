@@ -19,3 +19,5 @@ resources/sass/tmp-hylemin.scss
 src/resources/views/components/frame-old.blade.php
 manifest
 questions.md
+/.vscode/
+/api/

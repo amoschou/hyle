@@ -13,6 +13,7 @@ use AMoschou\Hyle\Components\{
     FormField,
     Radio,
     Select,
+    SwitchComponent,
     TextField,
     TopAppBar,
 };
@@ -64,6 +65,7 @@ class HyleServiceProvider extends ServiceProvider
         ]);
 
         Blade::component('hyle-fab', FloatingActionButton::class);
+        Blade::component('hyle-switch', SwitchComponent::class);
 
         $this->loadViewsFrom(__DIR__.'/resources/views', 'hyle');
     }

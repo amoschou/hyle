@@ -1,7 +1,7 @@
 <label
     id="text-field::{{ $id }}::root"
-        {{ $attributes->merge([
-            'class' => $class
+        {{ $attributes->whereDoesntStartWith('hyle::')->merge([
+            'class' => $class . ($prefilled ? ' mdc-text-field--label-floating' : '') . ($invalid ? ' mdc-text-field--invalid' : '')
         ]) }}
     data-mdc-auto-init="MDCTextField"
 >
@@ -15,12 +15,12 @@
         <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
             <span class="mdc-notched-outline__notch">
-                <span class="mdc-floating-label" id="text-field::{{ $id }}::floating-label">{{ $label }}</span>
+                <span class="mdc-floating-label @if($prefilled) mdc-floating-label--float-above @endif" id="text-field::{{ $id }}::floating-label">{{ $label }}</span>
             </span>
             <span class="mdc-notched-outline__trailing"></span>
         </span>
     @else
-        <span class="mdc-floating-label" id="text-field::{{ $id }}::floating-label">{{ $label }}</span>
+        <span class="mdc-floating-label @if($prefilled) mdc-floating-label--float-above @endif" id="text-field::{{ $id }}::floating-label">{{ $label }}</span>
     @endif
 
     {{-- render leading icon --}}
@@ -34,15 +34,7 @@
         <span class="mdc-text-field__affix mdc-text-field__affix--prefix">{{ $prefix }}</span>
     @endif
 
-    {{-- render input --}}
-    <input
-        class="mdc-text-field__input"
-        type="text"
-        aria-labelledby="text-field::{{ $id }}::floating-label"
-        aria-controls="text-field::{{ $id }}::helper-text"
-        aria-describedby="text-field::{{ $id }}::helper-text"
-        @if($disabled) disabled @endif
-    >
+    {!! $renderInput($shouldRenderHelperText) !!}
 
     {{-- render suffix --}}
     @if($suffix)
@@ -60,10 +52,4 @@
         <span class="mdc-line-ripple"></span>
     @endif
 </label>
-
-{{-- render help text --}}
-@if($shouldRenderHelperText)
-    <div class="mdc-text-field-helper-line">
-        <div class="mdc-text-field-helper-text" id="text-field::{{ $id }}::helper-text" aria-hidden="true" {{-- data-mdc-auto-init="MDCTextFieldHelperText" --}}>{{ $helper }}</div>
-    </div>
-@endif
+{!! $renderHelperText($shouldRenderHelperText, $shouldRenderCharCounter, $attributes['hyle::hasValidationError']) !!}

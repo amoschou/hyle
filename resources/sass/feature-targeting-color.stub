@@ -38,7 +38,7 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
 @use '@material/fab';
 @use '@material/floating-label/mdc-floating-label';
 @use '@material/form-field';
-@use '@material/icon-button';
+@use '@material/icon-button/icon-button';
 @use '@material/line-ripple/mdc-line-ripple';
 @use '@material/list';
 @use '@material/menu';
@@ -93,8 +93,17 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
             .mdc-top-app-bar__title,
             .mdc-top-app-bar__navigation-icon,
             .mdc-top-app-bar__action-item {
-                color: #fff;
-                color: var(--mdc-theme-text-primary-on-dark, #fff);
+                @include fix-theme.property(color, 'text-primary-on-dark');
+            }
+        }
+
+        .mdc-top-app-bar.hyle-contextual-top-app-bar {
+            background-color: c.${{ primaryColourLabel }}-desaturated;
+
+            .mdc-top-app-bar__title,
+            .mdc-top-app-bar__navigation-icon,
+            .mdc-top-app-bar__action-item {
+                @include fix-theme.property(color, 'on-primary');
             }
         }
 

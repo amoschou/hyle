@@ -3,7 +3,7 @@
     class="
         mdc-form-field
         @if($alignEnd) mdc-form-field--align-end @endif
-        @if(!$wrap) mdc-form-field--nowrap @endif
+        @if($nowrap) mdc-form-field--nowrap @endif
     "
     data-mdc-auto-init="MDCFormField"
 >

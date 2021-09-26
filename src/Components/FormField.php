@@ -5,38 +5,54 @@ namespace AMoschou\Hyle\Components;
 class FormField extends HyleComponent
 {
     /**
-     * By default, the input will be positioned before the label. You can
-     * position the input after the label by adding the
-     * mdc-form-field--align-end class.
+     * The text to display for the label and sets a11y label on input. (visually overriden by slotted label)
+     *
+     * @var string
+     */
+    public $label;
+
+    /**
+     * Align the component at the end of the label.
      *
      * @var boolean
      */
     public $alignEnd;
 
     /**
-     * If the label text is too long for a single line, it will wrap the text
-     * by default. You can force the text to stay on a single line and ellipse
-     * the overflow text by adding the mdc-form-field--nowrap class.
+     * Add space between the component and the label as the formfield grows.
      *
      * @var boolean
      */
-    public $wrap;
+    public $spaceBetween;
+
+    /**
+     * Prevents the label from wrapping and overflow text is ellipsed.
+     *
+     * @var boolean
+     */
+    public $nowrap;
 
     /**
      * Create a new component instance.
      *
+     * @param  string  $label
      * @param  boolean  $alignEnd
-     * @param  boolean  $wrap
+     * @param  boolean  $spaceBetween
+     * @param  boolean  $nowrap
      * @return void
      */
     public function __construct(
         $id = null,
+        $label = '',
         $alignEnd = false,
-        $wrap = true
+        $spaceBetween = false,
+        $nowrap = false
     ) {
         parent::__construct($id);
+        $this->label = $label;
         $this->alignEnd = $alignEnd;
-        $this->wrap = $wrap;
+        $this->spaceBetween = $spaceBetween;
+        $this->nowrap = $nowrap;
     }
 
     /**

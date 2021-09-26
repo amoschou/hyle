@@ -30,7 +30,7 @@
 @use '@material/feature-targeting';
 @use '@material/floating-label/mdc-floating-label';
 @use '@material/form-field';
-@use '@material/icon-button';
+@use '@material/icon-button/icon-button';
 @use '@material/layout-grid/mdc-layout-grid';
 @use '@material/line-ripple/mdc-line-ripple';
 @use '@material/list';

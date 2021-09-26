@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'sass:math';
-@use '@material/theme/color-palette' as cp;
+@use '@material/theme/color-palette' as mcp;
+@use '@carbon/colors/scss/colors' as cc;
 
 // Material environmental colours
 $black: #000000;   // Black

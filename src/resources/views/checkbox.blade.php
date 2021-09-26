@@ -20,6 +20,7 @@
                 @if($indeterminate) data-indeterminate="true" @endif
                 @if($disabled) disabled @endif
                 @if($value) value="{{ $value }}" @endif
+                @if($name) name="{{ $name }}" @endif
             />
             <div class="mdc-checkbox__background">
                 <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">

@@ -5,6 +5,7 @@
     $name = $name ?? '';
     $value = $value ?? '';
     $reducedTouchTarget = $reducedTouchTarget ?? false;
+    $label = $label ?? null;
 @endphp
 <x-hyle-form-field :id="$id">
     <x-hyle-radio
@@ -15,7 +16,9 @@
         :checked="$checked"
         :reduced-touch-target="$reducedTouchTarget"
     ></x-hyle-radio>
-    <label for="radio::{{ $id }}::native-control">{{ $label }}</label>
+    @if(!is_null($label))
+        <label for="radio::{{ $id }}::native-control">{{ $label }}</label>
+    @endif
 </x-hyle-form-field>
 @push('js')
     document.getElementById('form-field::{{ $id }}::root').MDCFormField.input = document.getElementById('radio::{{ $id }}::root').MDCRadio;

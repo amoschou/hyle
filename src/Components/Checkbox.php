@@ -44,6 +44,8 @@ class Checkbox extends HyleComponent
      */
     public $reducedTouchTarget;
 
+    public $name;
+
     /**
      * Create a new component instance.
      *
@@ -61,7 +63,8 @@ class Checkbox extends HyleComponent
         $indeterminate = false,
         $disabled = false,
         $value = '',
-        $reducedTouchTarget = false
+        $reducedTouchTarget = false,
+        $name = null
     ) {
         parent::__construct($id);
         $this->checked = $checked;
@@ -69,6 +72,7 @@ class Checkbox extends HyleComponent
         $this->disabled = $disabled;
         $this->value = $value;
         $this->reducedTouchTarget = $reducedTouchTarget;
+        $this->name = $name;
     }
 
     /**

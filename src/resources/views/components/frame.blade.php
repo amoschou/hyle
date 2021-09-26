@@ -77,9 +77,14 @@
             :fixed="$frameContext['top-app-bar']['fixed']"
             :short="$frameContext['top-app-bar']['short']"
             :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
-            :hyle::actionItems="$frameContext['top-app-bar']['action-items']"
+            :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
+            :hyle::contextualTopAppBar="$contextualTopAppBar"
         >
-            <x-slot name="navigationIcon"></x-slot>
+            <x-slot name="navigationIcon">
+                @if($contextualTopAppBar)
+                    <a href="{{ $contextualTopAppBarNavigationIconRoute }}" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="icon-button::{{ $id }}::top-app-bar::navigation-icon" aria-label="Close contextual page" data-mdc-auto-init="MDCRipple">close</a>
+                @endif
+            </x-slot>
             <x-slot name="title">{{ $frameContext['top-app-bar']['title'] }}</x-slot>
         </x-top-app-bar>
 
@@ -156,8 +161,14 @@
             :fixed="$frameContext['top-app-bar']['fixed']"
             :short="$frameContext['top-app-bar']['short']"
             :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
-            :hyle::actionItems="$frameContext['top-app-bar']['action-items']"
+            :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
+            :hyle::contextualTopAppBar="$contextualTopAppBar"
         >
+            <x-slot name="navigationIcon">
+                @if($contextualTopAppBar)
+                    <a href="{{ $contextualTopAppBarNavigationIconRoute }}" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="icon-button::{{ $id }}::top-app-bar::navigation-icon" aria-label="Close contextual page" data-mdc-auto-init="MDCRipple">close</a>
+                @endif
+            </x-slot>
             <x-slot name="title">{{ $frameContext['top-app-bar']['title'] }}</x-slot>
         </x-top-app-bar>
 
@@ -216,7 +227,7 @@
         }
         .frame--{{ $id }}--main {
             overflow: auto;
-            height: 100%;
+            height: 100vh;
         }
         .top-app-bar--{{ $id }}--root {
             position: absolute;
@@ -249,8 +260,14 @@
         :fixed="$frameContext['top-app-bar']['fixed']"
         :short="$frameContext['top-app-bar']['short']"
         :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
-        :hyle::actionItems="$frameContext['top-app-bar']['action-items']"
+        :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
+        :hyle::contextualTopAppBar="$contextualTopAppBar"
     >
+        <x-slot name="navigationIcon">
+            @if($contextualTopAppBar)
+                <a href="{{ $contextualTopAppBarNavigationIconRoute }}" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="icon-button::{{ $id }}::top-app-bar::navigation-icon" aria-label="Close contextual page" data-mdc-auto-init="MDCRipple">close</a>
+            @endif
+        </x-slot>
         <x-slot name="title">{{ $frameContext['top-app-bar']['title'] }}</x-slot>
     </x-top-app-bar>
 
@@ -348,8 +365,14 @@
             :fixed="$frameContext['top-app-bar']['fixed']"
             :short="$frameContext['top-app-bar']['short']"
             :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
-            :hyle::actionItems="$frameContext['top-app-bar']['action-items']"
+            :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
+            :hyle::contextualTopAppBar="$contextualTopAppBar"
         >
+            <x-slot name="navigationIcon">
+                @if($contextualTopAppBar)
+                    <a href="{{ $contextualTopAppBarNavigationIconRoute }}" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="icon-button::{{ $id }}::top-app-bar::navigation-icon" aria-label="Close contextual page" data-mdc-auto-init="MDCRipple">close</a>
+                @endif
+            </x-slot>
             <x-slot name="title">{{ $frameContext['top-app-bar']['title'] }}</x-slot>
         </x-top-app-bar>
 

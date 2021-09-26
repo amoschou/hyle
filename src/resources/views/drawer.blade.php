@@ -23,7 +23,7 @@
                         {{ $mdcList }}-item
                         @if($item['activated']) {{ $mdcList }}-item--activated @endif
                     "
-                    href="{{ $item['href'] }}"
+                    href="{{ route($item['route'], $item['routeParameter'] ?? null) }}"
                     @if($item['activated'])
                         aria-current="page"
                         tabindex="0"
@@ -34,6 +34,10 @@
                     @if($item['icon'] === 'icon:svg')
                         <div class="{{ $mdcList }}-item__graphic" aria-hidden="true">
                             {!! $item['icon-svg'] !!}
+                        </div>
+                    @elseif($item['icon'] === 'icon:named-svg')
+                        <div class="{{ $mdcList }}-item__graphic" aria-hidden="true">
+                            @include($item['icon-named-svg'])
                         </div>
                     @else
                         <i class="material-icons {{ $mdcList }}-item__graphic" aria-hidden="true">{{ $item['icon'] }}</i>
