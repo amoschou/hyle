@@ -23,7 +23,7 @@
                         {{ $mdcList }}-item
                         @if($item['activated']) {{ $mdcList }}-item--activated @endif
                     "
-                    href="{{ route($item['route'], $item['routeParameter'] ?? null) }}"
+                    href="{{ route($item['route'], $item['route-parameter'] ?? null) }}"
                     @if($item['activated'])
                         aria-current="page"
                         tabindex="0"

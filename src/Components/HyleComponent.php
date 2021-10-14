@@ -18,6 +18,7 @@ abstract class HyleComponent extends Component
      * Create a new component instance.
      *
      * @param  string  $id
+     * @param  boolean  $livewire
      * @return void
      */
     public function __construct(

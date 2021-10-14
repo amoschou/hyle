@@ -38,6 +38,7 @@
 @use '@material/menu-surface';
 @use '@material/notched-outline/mdc-notched-outline';
 @use '@material/radio/radio';
+@use '@material/ripple';
 @use '@material/select/select';
 @use '@material/textfield';
 @use '@material/textfield/helper-text';
@@ -61,6 +62,8 @@
 @include menu.core-styles(feature-targeting.without(color));
 @include menu-surface.core-styles(feature-targeting.without(color));
 @include radio.core-styles(feature-targeting.without(color));
+@include ripple.core-styles(feature-targeting.without(color));
+@include ripple.common(feature-targeting.without(color));
 @include select.core-styles(feature-targeting.without(color));
 @include textfield.core-styles(feature-targeting.without(color));
 @include helper-text.helper-text-core-styles(feature-targeting.without(color));

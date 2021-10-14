@@ -1,7 +1,7 @@
 <header
     id="top-app-bar::{{ $id }}::root"
     {{ $attributes->whereDoesntStartWith('hyle::')->merge([
-        'class' => $class . ($attributes['hyle::contextualTopAppBar'] ? ' hyle-contextual-top-app-bar' : '')
+        'class' => $class . ($attributes['hyle::contextualTopAppBar'] ? ' hyle-contextual-top-app-bar' : '') . ($attributes['hyle::contextualTopAppBarSemantic'] ? ' hyle-contextual-top-app-bar--'.$attributes['hyle::contextualTopAppBarSemantic'] : '')
     ]) }}
     data-mdc-auto-init="MDCTopAppBar"
 >

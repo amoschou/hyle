@@ -1,6 +1,6 @@
 <label
     id="text-field::{{ $id }}::root"
-        {{ $attributes->whereDoesntStartWith('hyle::')->merge([
+        {{ $attributes->whereDoesntStartWith('hyle::')->whereDoesntStartWith('wire:')->merge([
             'class' => $class . ($prefilled ? ' mdc-text-field--label-floating' : '') . ($invalid ? ' mdc-text-field--invalid' : '')
         ]) }}
     data-mdc-auto-init="MDCTextField"
@@ -34,7 +34,7 @@
         <span class="mdc-text-field__affix mdc-text-field__affix--prefix">{{ $prefix }}</span>
     @endif
 
-    {!! $renderInput($shouldRenderHelperText) !!}
+    {!! $renderInput($shouldRenderHelperText, $attributes->whereStartsWith('wire:')) !!}
 
     {{-- render suffix --}}
     @if($suffix)

@@ -348,7 +348,7 @@ class TextField extends HyleComponent
      *
      * @return \Illuminate\View\View|string
      */
-    public function renderInput($shouldRenderHelperText)
+    public function renderInput($shouldRenderHelperText, $attributes = null)
     {
         $showValidationMessage = $this->validationMessage && !$this->isUiValid;
 
@@ -391,7 +391,13 @@ class TextField extends HyleComponent
             }
         }
 
-        return '<input ' . implode(' ', $inputAttributesStrings) . '>';
+        $moreAttributes = [];
+
+        foreach($attributes->whereStartsWith('wire:') as $key => $val) {
+            $moreAttributes[] = "{$key}=\"{$val}\"";
+        }
+
+        return '<input ' . implode(' ', $inputAttributesStrings) . ' ' . implode(' ', $moreAttributes) . '>';
     }
 
     public function renderHelperText($shouldRenderHelperText, $shouldRenderCharCounter, $hasValidationError = false) {

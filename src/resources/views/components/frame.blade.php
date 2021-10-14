@@ -79,9 +79,10 @@
             :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
             :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
             :hyle::contextualTopAppBar="$contextualTopAppBar"
+            :hyle::contextualTopAppBarSemantic="$contextualTopAppBarSemantic ?? null"
         >
             <x-slot name="navigationIcon">
-                @if($contextualTopAppBar)
+                @if(($contextualTopAppBarIcon ?? true) && $contextualTopAppBar)
                     <a href="{{ $contextualTopAppBarNavigationIconRoute }}" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="icon-button::{{ $id }}::top-app-bar::navigation-icon" aria-label="Close contextual page" data-mdc-auto-init="MDCRipple">close</a>
                 @endif
             </x-slot>
@@ -163,6 +164,7 @@
             :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
             :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
             :hyle::contextualTopAppBar="$contextualTopAppBar"
+            :hyle::contextualTopAppBarSemantic="$contextualTopAppBarSemantic ?? null"
         >
             <x-slot name="navigationIcon">
                 @if($contextualTopAppBar)
@@ -262,6 +264,7 @@
         :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
         :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
         :hyle::contextualTopAppBar="$contextualTopAppBar"
+        :hyle::contextualTopAppBarSemantic="$contextualTopAppBarSemantic ?? null"
     >
         <x-slot name="navigationIcon">
             @if($contextualTopAppBar)
@@ -367,6 +370,7 @@
             :shortCollapsed="$frameContext['top-app-bar']['short-collapsed']"
             :hyle::actionItems="$contextualTopAppBar ? [] : $frameContext['top-app-bar']['action-items']"
             :hyle::contextualTopAppBar="$contextualTopAppBar"
+            :hyle::contextualTopAppBarSemantic="$contextualTopAppBarSemantic ?? null"
         >
             <x-slot name="navigationIcon">
                 @if($contextualTopAppBar)

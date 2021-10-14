@@ -45,6 +45,7 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
 @use '@material/menu-surface';
 @use '@material/notched-outline/mdc-notched-outline';
 @use '@material/radio/radio';
+@use '@material/ripple';
 @use '@material/select/select';
 @use '@material/textfield';
 @use '@material/textfield/helper-text';
@@ -75,6 +76,8 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
     @include menu.core-styles(color);
     @include menu-surface.core-styles(color);
     @include radio.core-styles(color);
+    @include ripple.core-styles(color);
+    @include ripple.common(color);
     @include select.core-styles(color);
     @include textfield.core-styles(color);
     @include helper-text.helper-text-core-styles(color);
@@ -98,7 +101,7 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
         }
 
         .mdc-top-app-bar.hyle-contextual-top-app-bar {
-            background-color: c.${{ primaryColourLabel }}-desaturated;
+            background-color: theme.$primary;
 
             .mdc-top-app-bar__title,
             .mdc-top-app-bar__navigation-icon,
@@ -107,6 +110,18 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
             }
         }
 
+        .mdc-top-app-bar.hyle-contextual-top-app-bar.hyle-contextual-top-app-bar--error {
+            background-color: theme.$error;
+
+            .mdc-top-app-bar__title,
+            .mdc-top-app-bar__navigation-icon,
+            .mdc-top-app-bar__action-item {
+                // @include fix-theme.property(color, 'on-error'); // This generates the wrong colour.
+                @include fix-theme.property(color, 'on-light'); // This is better for the default Material error in dark theme.
+            }
+        }
+
+        // TODO: overlay uses the "on-surface" colour, not necessarily white.
         .mdc-top-app-bar--short-collapsed .mdc-elevation-overlay,
         .mdc-top-app-bar--fixed-scrolled .mdc-elevation-overlay {
             background-color: rgba(255, 255, 255, 0.09);
@@ -117,6 +132,7 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
             opacity: 100%;
         }
 
+        // TODO: overlay uses the "on-surface" colour, not necessarily white.
         .mdc-menu-surface .mdc-elevation-overlay {
             background-color: rgba(255, 255, 255, 0.12);
             width: 100%;

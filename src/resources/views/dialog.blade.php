@@ -46,7 +46,7 @@ CONFIRMATIONCONTENT;
     data-mdc-auto-init="MDCDialog"
 >
     <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface"
+        <div class="mdc-dialog__surface mdc-menu-surface--anchor"
             role="alertdialog"
             aria-modal="true"
             @isset($heading) aria-labelledby="dialog::{{ $id }}::title" @endisset
