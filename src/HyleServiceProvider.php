@@ -47,8 +47,6 @@ class HyleServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../resources/config/theme-definition.json' => config_path('hyle.json'),
             ], 'config');
-
-            return;
         }
 
         $this->loadViewComponentsAs('hyle', [
