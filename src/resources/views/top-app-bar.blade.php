@@ -82,7 +82,7 @@
                         id="icon-button::{{ $id }}::top-app-bar::action-item-{{ $loop->index }}"
                         aria-label="{{ $item['label'] }}"
                         data-mdc-auto-init="MDCRipple"
-                        href="{{ route($item['route']) }}"
+                        href="{{ route($item['route'], $item['route-parameters'] ?? []) }}"
                     >
                         <div class="mdc-icon-button__ripple"></div>
                         @if($item['icon'] === 'icon:named-svg')
