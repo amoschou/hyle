@@ -17,7 +17,10 @@
             @if($loop->first)
                 <nav class="{{ $mdcList }}" id="list::{{ $id }}::root" @if($type === '') data-mdc-auto-init="MDCList" @endif >
             @endif
-            @if(!($item['hidden'] ?? false))
+            @if(($item['role'] ?? 'item') === 'divider')
+                <hr class="mdc-deprecated-list-divider">
+                <h6 class="mdc-deprecated-list-group__subheader">{{ $item['group-subheader'] }}</h6>
+            @elseif(!($item['hidden'] ?? false))
                 <a
                     class="
                         {{ $mdcList }}-item
