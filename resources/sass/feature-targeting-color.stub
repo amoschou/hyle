@@ -32,6 +32,7 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
 @use '@material/card';
 @use '@material/checkbox';
 @use '@material/circular-progress';
+@use '@material/data-table/data-table';
 @use '@material/dialog';
 @use '@material/drawer';
 @use '@material/elevation';
@@ -64,6 +65,8 @@ $theme: pre.map-deep-get(pre.$themes, '{{ lightDark }}', '{{ primaryColourLabel 
     @include checkbox.core-styles(color);
     @include card.core-styles(color);
     @include circular-progress.core-styles(color);
+    @include data-table.core-styles(color);
+    @include data-table.theme-baseline(color);
     @include dialog.core-styles(color);
     @include drawer.core-styles(color);
     @include drawer.dismissible-core-styles(color);

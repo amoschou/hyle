@@ -23,6 +23,7 @@
 @use '@material/card';
 @use '@material/checkbox';
 @use '@material/circular-progress';
+@use '@material/data-table/data-table';
 @use '@material/dialog';
 @use '@material/drawer';
 @use '@material/elevation';
@@ -50,6 +51,8 @@
 @include card.core-styles(feature-targeting.without(color));
 @include checkbox.core-styles(feature-targeting.without(color));
 @include circular-progress.core-styles(feature-targeting.without(color));
+@include data-table.core-styles(feature-targeting.without(color));
+@include data-table.theme-baseline(feature-targeting.without(color));
 @include dialog.core-styles(feature-targeting.without(color));
 @include drawer.core-styles(feature-targeting.without(color));
 @include drawer.dismissible-core-styles(feature-targeting.without(color));
