@@ -36,7 +36,7 @@
                             <div class="mdc-elevation-overlay"></div>
                             <div class="mdc-deprecated-list-group">
                                 @auth
-                                    <h3 class="mdc-deprecated-list-group__subheader">{{ Auth::user()->name }}</h3>
+                                    <h3 class="mdc-deprecated-list-group__subheader mdc-deprecated-list-item__text">{{ Auth::user()->name }}</h3>
                                 @endauth
                                 <ul class="mdc-deprecated-list mdc-deprecated-list--icon-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
                                     @foreach($item[Auth::check() ? 'menu.auth' : 'menu.guest'] ?? $item['menu'] as $menuItem)
