@@ -91,6 +91,10 @@
 
         <main class="frame--{{ $id }}--main" id="frame::{{ $id }}::main">
             <div class="{{ $classFixedAdjust }}"></div>
+
+            {{ $banner ?? '' }}
+
+            {{ $navRegion ?? '' }}
             
             @if($bareApp)
                 {{ $slot }}
@@ -176,6 +180,10 @@
 
         <main class="frame--{{ $id }}--main" id="frame::{{ $id }}::main">
             <div class="{{ $classFixedAdjust }}"></div>
+
+            {{ $banner ?? '' }}
+
+            {{ $navRegion ?? '' }}
 
             @if($bareApp)
                 {{ $slot }}
@@ -280,6 +288,10 @@
 
     <div class="mdc-drawer-app-content {{ $classFixedAdjust }}">
         <main class="frame--{{ $id }}--main" id="frame::{{ $id }}::main">
+            {{ $banner ?? '' }}
+
+            {{ $navRegion ?? '' }}
+
             @if($bareApp)
                 {{ $slot }}
             @else
@@ -381,6 +393,10 @@
         </x-top-app-bar>
 
         <div class="{{ $classFixedAdjust }}"></div>
+
+        {{ $banner ?? '' }}
+
+        {{ $navRegion ?? '' }}
 
         @if($bareApp)
             {{ $slot }}
