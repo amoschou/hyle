@@ -23,7 +23,7 @@
     $frameContext = [
         'drawer' => [
             'title' => $drawerTitle ?? null,
-            'subtitle' => $drawerSubtitle ?? null,
+            'subtitle' => $drawerSubtitle ?? null,v
             'type' => $drawerType ?? null,
             'class' => ($drawerOpen && ($drawerType === 'dismissible' || $drawerType === 'dismissible-2')) ? 'mdc-drawer--open' : '',
             'contentItems' => $drawerContentItems,
@@ -99,7 +99,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 frame-main-article">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
@@ -299,7 +299,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 frame-main-article">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
