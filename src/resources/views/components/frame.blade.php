@@ -190,7 +190,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 frame-main-article">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
