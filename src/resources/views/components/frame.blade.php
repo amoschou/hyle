@@ -111,6 +111,8 @@
                     </div>
                 </div>
             @endif
+
+            {{ $footer ?? '' }}
         </main>
     </div>
 
@@ -200,6 +202,8 @@
                     </div>
                 </div>
             @endif
+
+            {{ $footer ?? '' }}
         </main>
     </div>
 
@@ -307,6 +311,8 @@
                     </div>
                 </div>
             @endif
+
+            {{ $footer ?? '' }}
         </main>
     </div>
 
