@@ -23,7 +23,7 @@
     $frameContext = [
         'drawer' => [
             'title' => $drawerTitle ?? null,
-            'subtitle' => $drawerSubtitle ?? null,v
+            'subtitle' => $drawerSubtitle ?? null,
             'type' => $drawerType ?? null,
             'class' => ($drawerOpen && ($drawerType === 'dismissible' || $drawerType === 'dismissible-2')) ? 'mdc-drawer--open' : '',
             'contentItems' => $drawerContentItems,
@@ -89,7 +89,7 @@
             <x-slot name="title">{{ $frameContext['top-app-bar']['title'] }}</x-slot>
         </x-top-app-bar>
 
-        <main class="frame--{{ $id }}--main" id="frame::{{ $id }}::main">
+        <main class="frame--{{ $id }}--main frame-main-article" id="frame::{{ $id }}::main">
             <div class="{{ $classFixedAdjust }}"></div>
 
             {{ $banner ?? '' }}
@@ -99,7 +99,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 frame-main-article">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
@@ -180,7 +180,7 @@
             <x-slot name="title">{{ $frameContext['top-app-bar']['title'] }}</x-slot>
         </x-top-app-bar>
 
-        <main class="frame--{{ $id }}--main" id="frame::{{ $id }}::main">
+        <main class="frame--{{ $id }}--main frame-main-article" id="frame::{{ $id }}::main">
             <div class="{{ $classFixedAdjust }}"></div>
 
             {{ $banner ?? '' }}
@@ -190,7 +190,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 frame-main-article">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
@@ -204,6 +204,7 @@
             @endif
 
             {{ $footer ?? '' }}
+
         </main>
     </div>
 
@@ -291,7 +292,7 @@
     </x-hyle::drawer>
 
     <div class="mdc-drawer-app-content {{ $classFixedAdjust }}">
-        <main class="frame--{{ $id }}--main" id="frame::{{ $id }}::main">
+        <main class="frame--{{ $id }}--main frame-main-article" id="frame::{{ $id }}::main">
             {{ $banner ?? '' }}
 
             {{ $navRegion ?? '' }}
@@ -299,7 +300,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 frame-main-article">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
