@@ -99,7 +99,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 mdc-layout-grid--padding-bottom-8">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
@@ -111,9 +111,9 @@
                     </div>
                 </div>
             @endif
-
-            {{ $footer ?? '' }}
         </main>
+
+{{ $footer ?? '' }}
     </div>
 
     {{ $frameFab ?? null }}
@@ -190,7 +190,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 mdc-layout-grid--padding-bottom-8">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
@@ -203,9 +203,9 @@
                 </div>
             @endif
 
-            {{ $footer ?? '' }}
-
         </main>
+
+{{ $footer ?? '' }}
     </div>
 
     {{ $frameFab ?? null }}
@@ -300,7 +300,7 @@
             @if($bareApp)
                 {{ $slot }}
             @else
-                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+                <div class="mdc-layout-grid mdc-layout-grid--padding-top-0  mdc-layout-grid--padding-bottom-8">
                     <div class="mdc-layout-grid__inner">
                         <div
                             class="
@@ -312,9 +312,9 @@
                     </div>
                 </div>
             @endif
-
-            {{ $footer ?? '' }}
         </main>
+
+{{ $footer ?? '' }}
     </div>
 
     {{ $frameFab ?? null }}
@@ -408,7 +408,7 @@
         @if($bareApp)
             {{ $slot }}
         @else
-            <div class="mdc-layout-grid mdc-layout-grid--padding-top-0">
+            <div class="mdc-layout-grid mdc-layout-grid--padding-top-0 mdc-layout-grid--padding-bottom-8">
                 <div class="mdc-layout-grid__inner">
                     <div
                         class="
